@@ -1,41 +1,48 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from amalearn.environment import TenArmedBanditEnv
-from amalearn.reward import StdNormalReward
-from amalearn.agent import TenArmedBanditAgent
+from amalearn.environment import UniEnv
+from amalearn.reward import UniReward
+from amalearn.agent import UniAgent
 
-number_of_arms = 10
-# means = [0.1, 0.1, 0.1, 0.1, 0.9]
+number_of_arms = 14
 
-np.random.seed(7)
-
-rewards = [StdNormalReward() for i in range(number_of_arms)]
-env = TenArmedBanditEnv(rewards, 1000, '1')
-agent = TenArmedBanditAgent('1', env)
-agent.setup()
-results = [list() for i in range(10)]
-agg_results = list()
+# np.random.seed(7)
+fig = plt.figure(6)
 
 
-for step in range(1000):
-    counts = agent.take_action()
-    for i in range(len(results)):
-        results[i].append(counts[i] / sum(counts))
+def temp(fig, number_of_arms, value, index):
+
+    rewards = [UniReward() for i in range(number_of_arms)]
+    env = UniEnv(rewards, 10000, '1')
+    agent = UniAgent('1', env, 'eGreedy', value)
+    agent.setup()
+    results = [list() for i in range(14)]
 
 
 
 
-# for i in range(len(results)):
-#     plt.plot(results[i])
+    for step in range(10000):
+        counts = agent.take_action()
+        for i in range(len(results)):
+            results[i].append(counts[i] / sum(counts))
 
-rewards_means = [reward.get_info() for reward in rewards]
-plt.plot(np.multiply(100, results[rewards_means.index(max(rewards_means))]))
 
-# plt.legend([reward.get_info() for reward in rewards])
-plt.annotate(str(results[rewards_means.index(max(rewards_means))][-1]), 
-    (1000, results[rewards_means.index(max(rewards_means))][-1] * 100))
-plt.grid(axis='y')
+
+    cm = plt.get_cmap('gist_rainbow')
+    ax = fig.add_subplot(2, 3, index + 1)
+    ax.set_title(str(value))
+    ax.grid(axis='y')
+    # ax.legend()
+    ax.set_prop_cycle(color=[cm(1.*i/7) for i in range(7)])
+    for i in range(0, len(results), 2):
+        ax.plot(results[i])
+
+
+
+for i, value in enumerate([400, 420, 480, 500, 550, 600]):
+    temp(fig, number_of_arms, value, i)
+
 plt.show()
 
 
