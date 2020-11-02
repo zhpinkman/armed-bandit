@@ -43,12 +43,12 @@ class TenArmedBanditAgent(AgentBase):
         observation, reward, done, info = self.environment.step(chosen_arm_index)
         self.observations[chosen_arm_index].append(reward)
         self.update_params(chosen_arm_index, reward)
-        print(observation, reward, done, info)
+        # print(observation, reward, done, info)
         self.environment.render()
         # print('rate of choosing arms:')
         # for i in range(5):
             # print(i, ':', self.counts[i] / sum(self.counts))
         # return observation, reward, done, info
-        print(self.mu)
-        print(self.pi)
+        # print(self.mu)
+        # print(self.pi)
         return self.counts

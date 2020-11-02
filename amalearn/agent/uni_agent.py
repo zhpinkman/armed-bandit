@@ -65,6 +65,7 @@ class UniAgent(AgentBase):
         self.environment.render()
         # print(self.qValues)
         if sum(self.counts) % 100 == 0:
+            # print(self.qValues)
             self.eps -= 0.005 
         # print(self.eps)
         return self.counts

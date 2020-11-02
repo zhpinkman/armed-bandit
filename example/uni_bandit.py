@@ -30,7 +30,7 @@ def temp(fig, number_of_arms, value, index):
 
 
     cm = plt.get_cmap('gist_rainbow')
-    ax = fig.add_subplot(2, 3, index + 1)
+    ax = fig.add_subplot(3, 4, index + 1)
     ax.set_title(str(value))
     ax.grid(axis='y')
     # ax.legend()
@@ -40,10 +40,8 @@ def temp(fig, number_of_arms, value, index):
 
 
 
-for i, value in enumerate([400, 420, 480, 500, 550, 600]):
+for i, value in enumerate([220, 240, 260, 280, 300, 320, 360, 380, 400, 420, 480, 500]):
     temp(fig, number_of_arms, value, i)
 
 plt.show()
-
-
 

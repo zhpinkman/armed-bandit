@@ -8,7 +8,7 @@ from amalearn.agent import TenArmedBanditAgent
 number_of_arms = 10
 # means = [0.1, 0.1, 0.1, 0.1, 0.9]
 
-np.random.seed(7)
+# np.random.seed(7)
 
 rewards = [StdNormalReward() for i in range(number_of_arms)]
 env = TenArmedBanditEnv(rewards, 1000, '1')
