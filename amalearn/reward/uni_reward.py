@@ -10,10 +10,9 @@ class UniReward(RewardBase):
     def get_reward(self):
         base = 0
         reward = int(np.random.normal(loc=self.mean, scale=self.std))
-        if reward >= base:
-            return reward
-        else:
-            return int(np.random.normal(loc=self.mean, scale=2))
+        while reward < base:
+            reward = int(np.random.normal(loc=self.mean, scale=self.std))
+        return reward
 
     def get_info(self):
         return self.mean

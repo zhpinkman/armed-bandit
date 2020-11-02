@@ -5,12 +5,13 @@ class UniAgent(AgentBase):
     def __init__(self, id, environment, policy, mon):
         super(UniAgent, self).__init__(id, environment)
         self.policy = policy
-        self.lamda = -2.25
+        self.lamda = -3.25
         self.alpha = 0.88
         self.beta = 0.88
         self.monetary_value = 2000.0 / mon
         self.qValues = list()
         self.counts = list()
+        self.observation = list()
         self.delay_border = 10
         self.eps = 0.5
 
@@ -18,6 +19,7 @@ class UniAgent(AgentBase):
         actions_n = self.environment.available_actions()
         self.qValues = [8.0 for i in range(actions_n)]
         self.counts = [0 for i in range(actions_n)]
+        self.observation = [list() for i in range(actions_n)]
 
 
     def pick_arm(self):
@@ -43,9 +45,9 @@ class UniAgent(AgentBase):
         # you get bus
         if reward <= chosen_arm_index:
             if reward <= self.delay_border:
-                return (self.delay_border - reward)**self.alpha + self.monetary_value
+                return (self.delay_border - reward)**self.alpha + 5
             else:
-                return self.lamda * (reward - self.delay_border)**self.beta + self.monetary_value
+                return self.lamda * (reward - self.delay_border)**self.beta + 5
         # you get taxi
         else:
             if chosen_arm_index <= self.delay_border:
@@ -60,6 +62,7 @@ class UniAgent(AgentBase):
     def take_action(self):
         chosen_arm_index = self.pick_arm()
         observation, reward, done, info = self.environment.step(chosen_arm_index)
+        self.observation[chosen_arm_index].append(reward)
         reward = self.apply_subjective(chosen_arm_index, reward)
         self.update_params(chosen_arm_index, reward)
         self.environment.render()
