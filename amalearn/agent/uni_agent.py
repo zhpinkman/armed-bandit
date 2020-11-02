@@ -2,13 +2,13 @@ import numpy as np
 from amalearn.agent import AgentBase
 
 class UniAgent(AgentBase):
-    def __init__(self, id, environment, policy, mon):
+    def __init__(self, id, environment, policy):
         super(UniAgent, self).__init__(id, environment)
         self.policy = policy
         self.lamda = -3.25
         self.alpha = 0.88
         self.beta = 0.88
-        self.monetary_value = 2000.0 / mon
+        self.monetary_value = 5
         self.qValues = list()
         self.counts = list()
         self.observation = list()
@@ -45,9 +45,9 @@ class UniAgent(AgentBase):
         # you get bus
         if reward <= chosen_arm_index:
             if reward <= self.delay_border:
-                return (self.delay_border - reward)**self.alpha + 5
+                return (self.delay_border - reward)**self.alpha + self.monetary_value
             else:
-                return self.lamda * (reward - self.delay_border)**self.beta + 5
+                return self.lamda * (reward - self.delay_border)**self.beta + self.monetary_value
         # you get taxi
         else:
             if chosen_arm_index <= self.delay_border:
