@@ -8,9 +8,8 @@ class TenArmedBanditAgent(AgentBase):
         self.counts = list()
         self.mu = list()
         self.pi = list()
-        self.lr = 0.1
+        self.lr = 0.35
         self.observations = list()
-        self.rewards = list()
 
     def setup(self):
         actions_n = self.environment.available_actions()
@@ -37,8 +36,8 @@ class TenArmedBanditAgent(AgentBase):
     def take_action(self):
         chosen_arm_index = self.pick_arm()
         observation, reward, done, info = self.environment.step(chosen_arm_index)
-        self.rewards.append(reward)
+        self.lr -= .3 / 1000
         self.observations[chosen_arm_index].append(reward)
         self.update_params(chosen_arm_index, reward)
         self.environment.render()
-        return self.counts, self.mu, self.rewards
+        return self.counts, self.mu, reward
