@@ -14,7 +14,8 @@ lr = 0.001             |  lr = 0.0001
 :-------------------------:|:-------------------------:
 ![](results/part1/lr=0.001.png) | ![](results/part1/lr=0.0001.png)
 
-* the scale of y axis in these plots is the number of using specified actions, whereas the x axis scale is the number of trials
+* The scale of y axis in these plots is the number of using specified actions, whereas the x axis scale is the number of trials.
+* Another attendable part of these plots is that the legend is depicting different arms' award means. 
 
 ## important observations in part 2:
 
