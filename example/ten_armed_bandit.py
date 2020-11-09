@@ -38,6 +38,8 @@ def plot_AR(plt, window_AR):
 
 def plot_regrets(plt, regrets):
     plt.plot(regrets)
+    plt.annotate(str(np.round(regrets[-1])), 
+        (1000, regrets[-1]))
     plt.title('Regrets plot')
     plt.ylabel('Degree of regret')
     plt.xlabel('Trials')

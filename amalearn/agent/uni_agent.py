@@ -5,9 +5,9 @@ class UniAgent(AgentBase):
     def __init__(self, id, environment, policy):
         super(UniAgent, self).__init__(id, environment)
         self.policy = policy
-        self.lamda = -3.25
+        self.lamda = -4
         self.alpha = 0.88
-        self.beta = 0.88
+        self.beta = 1.12
         self.monetary_value = 5
         self.qValues = list()
         self.counts = list()
@@ -66,9 +66,6 @@ class UniAgent(AgentBase):
         reward = self.apply_subjective(chosen_arm_index, reward)
         self.update_params(chosen_arm_index, reward)
         self.environment.render()
-        # print(self.qValues)
         if sum(self.counts) % 100 == 0:
-            # print(self.qValues)
             self.eps -= 0.005 
-        # print(self.eps)
-        return self.counts
+        return self.counts, self.qValues
