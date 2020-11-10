@@ -8,7 +8,7 @@ class UniAgent(AgentBase):
         self.lamda = -5
         self.alpha = .88
         self.beta = 1.5
-        self.monetary_value = 9
+        self.monetary_value = 8.5
         self.h = 1.5
         self.qValues = list()
         self.counts = list()

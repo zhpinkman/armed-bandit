@@ -35,6 +35,7 @@ def plot_AR(plt, AR):
     plt.title('Average rate of using optimal action')
     plt.xlabel('Trials')
     plt.ylabel('AR')
+    plt.grid(axis='y')
     plt.annotate(str(np.round(100*max_ARR_means[-1])) + '%', (len(max_ARR_means), 100*max_ARR_means[-1]))
 
 
