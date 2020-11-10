@@ -2,8 +2,9 @@ from amalearn.reward import RewardBase
 import numpy as np
 
 class NetReward(RewardBase):
-    def __init__(self):
+    def __init__(self, c1, c2, c3):
         super(NetReward, self).__init__()
+        self.c_list = [c1, c2, c3]
         self.link_delays = {
             'b': (2, .2), 
             'g': (0, 6), 
@@ -26,15 +27,15 @@ class NetReward(RewardBase):
             6: .15, 7: .65, 8: .12, 9: .2, 10: .05, 11: .45
         }
 
-    def get_reward(self, c1, c2, c3):
+    def get_reward(self):
         delay = 0
-        for c in [c1, c2, c3]:
+        for c in self.c_list:
             delay += 30 * np.random.binomial(1, self.p_dict[c])
         path = list()
-        path.append('0' + str(c1))
-        path.append(str(c1) + str(c2))
-        path.append(str(c2) + str(c3))
-        path.append(str(c3) + '12')
+        path.append('0' + str(self.c_list[0]))
+        path.append(str(self.c_list[0]) + str(self.c_list[1]))
+        path.append(str(self.c_list[1]) + str(self.c_list[2]))
+        path.append(str(self.c_list[2]) + '12')
         for link in path:
             delay += self.link_delays[self.delay_dict[link]]
         return get_reward
