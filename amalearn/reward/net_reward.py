@@ -37,6 +37,7 @@ class NetReward(RewardBase):
         path.append(str(self.c_list[1]) + str(self.c_list[2]))
         path.append(str(self.c_list[2]) + '12')
         for link in path:
-            delay += self.link_delays[self.delay_dict[link]]
-        return get_reward
+            mean, std = self.link_delays[self.delay_dict[link]]
+            delay += np.random.normal(mean, std)
+        return delay
         

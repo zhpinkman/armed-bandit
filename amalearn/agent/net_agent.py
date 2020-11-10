@@ -12,7 +12,7 @@ class NetAgent(AgentBase):
 
     def setup(self):
         actions_n = self.environment.available_actions()
-        self.qValues = [8.0 for i in range(actions_n)]
+        self.qValues = [100.0 for i in range(actions_n)]
         self.counts = [0 for i in range(actions_n)]
         self.observation = [list() for i in range(actions_n)]
 
@@ -23,7 +23,7 @@ class NetAgent(AgentBase):
         if p < self.eps:
             chosen_arm_index = np.random.choice(available_actions)
         else:
-            chosen_arm_index = np.argmax(self.qValues)
+            chosen_arm_index = np.argmin(self.qValues)
         return chosen_arm_index
         
         
@@ -44,6 +44,6 @@ class NetAgent(AgentBase):
         observation, reward, done, info = self.environment.step(chosen_arm_index)
         self.observation[chosen_arm_index].append(reward)
         self.update_params(chosen_arm_index, reward)
-        if sum(self.counts) % 100 == 0:
-            self.eps -= 0.005 
+        if sum(self.counts) % 10 == 0:
+            self.eps -= 0.0005 
         return self.counts, self.qValues

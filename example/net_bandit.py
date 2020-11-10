@@ -1,37 +1,31 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import interpolate
+import itertools
 
 from amalearn.environment import NetEnv
 from amalearn.reward import NetReward
 from amalearn.agent import NetAgent
 
-number_of_arms = 14
-fig = plt.figure(6)
+number_of_arms = 45
 
 agg_results = list()
 agg_qValues = list()
 
 def plot_qValues(plt, qValues):
-    qValues_array = np.array(qValues)
-    qValues_means = np.mean(qValues_array, axis=0)
-    for index, value in enumerate(qValues_means):
-        print('waiting time ' + str(index) + ' : ' + str(value))
-    x = np.linspace(0, number_of_arms, 300)
-    a_BSpline = interpolate.make_interp_spline(np.arange(0, number_of_arms), qValues_means)
-    y = a_BSpline(x)
-    plt.plot(x, y)
-    plt.title('qValues corresponding to every waiting arm')
-    plt.xlabel('Waiting time')
+    means = np.mean(qValues, axis=0)
+    plt.plot(means)
+    plt.grid()
+    plt.xticks(np.arange(len(means)))
+    plt.title('qValues corresponding to every arm which is a path thorough network')
+    plt.xlabel('Path index')
     plt.ylabel('qValue')
-    plt.grid(axis='y')
 
 def plot_AR(plt, AR):
     ARR_array = np.array(AR)
     ARR_means = np.mean(ARR_array, axis=0)
     max_ARR_means = np.max(ARR_means, axis=0)
     plt.plot(100 * max_ARR_means)
-    plt.legend([('Waiting time: ' + str(i)) for i in range(0, number_of_arms, 2)])
     plt.title('Average rate of using optimal action')
     plt.xlabel('Trials')
     plt.ylabel('AR')
@@ -52,9 +46,31 @@ def perform_one_epoch(fig, number_of_arms, value, index):
     return results, qValues
 
 
+c2_list = [1, 2, 3]
+c3_list = [4, 5, 6, 7, 8]
+c4_list = [9, 10, 11]
+
+
+rewards = [NetReward(c1, c2, c3) for c1, c2, c3 in itertools.product(c2_list, c3_list, c4_list)]
+env = NetEnv(rewards, 10000, '1')
+agent = NetAgent('1', env, 'eGreedy')
+agent.setup()
+
+agg_results = []
+agg_qValues = []
+
+for i in range(20):
+    results = [list() for i in range(number_of_arms)]
+    for step in range(10000):
+        counts, qValues = agent.take_action()
+        for i in range(number_of_arms):
+            results[i].append(counts[i] / sum(counts))
+    agg_results.append(results)
+    agg_qValues.append(qValues)
 
 
 
 
-
-
+plot_AR(plt, agg_results)
+# plot_qValues(plt, agg_qValues)
+plt.show()
