@@ -5,11 +5,12 @@ import matplotlib.pyplot as plt
 mean = 6
 std = 4
 
-beta = 1.12
+beta = 1.5
 alpha = .88
-lamda = -4
-monetary_value = 5
+lamda = -5
+monetary_value = 9
 delay_border = 10
+h = 1.5
 
 def mean_reward(limit, mode = 0):
     a = np.random.normal(mean, std, 100000)
@@ -25,7 +26,11 @@ def mean_reward(limit, mode = 0):
 
 def calc_rewards(chosen_arm):
     result = 0
-    result += stats.norm.cdf(chosen_arm, mean, std) * ( stats.norm.cdf(10, mean, std) * ((delay_border - mean_reward(delay_border))**alpha + monetary_value) + (1 - stats.norm.cdf(10, mean, std)) * (lamda*(mean_reward(delay_border, mode=1) - delay_border)**beta + monetary_value) )
+    p = 0
+    if chosen_arm > delay_border:
+        p = (chosen_arm - delay_border)**h
+    result += stats.norm.cdf(chosen_arm, mean, std) * ( stats.norm.cdf(10, mean, std) * ((delay_border - mean_reward(delay_border))**alpha + monetary_value) + 
+        (1 - stats.norm.cdf(10, mean, std)) * (lamda*(mean_reward(delay_border, mode=1) - delay_border)**beta + monetary_value - p) )
     if chosen_arm <= delay_border:
         result += (1 - stats.norm.cdf(chosen_arm, mean, std)) * (delay_border - chosen_arm)**alpha
     else:
@@ -40,4 +45,3 @@ for i in range(20):
 
 plt.plot(actual_rewards)
 plt.show()
-

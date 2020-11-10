@@ -6,7 +6,7 @@ from amalearn.environment import UniEnv
 from amalearn.reward import UniReward
 from amalearn.agent import UniAgent
 
-number_of_arms = 20
+number_of_arms = 14
 fig = plt.figure(6)
 
 agg_results = list()
@@ -25,20 +25,17 @@ def plot_qValues(plt, qValues):
     plt.xlabel('Waiting time')
     plt.ylabel('qValue')
     plt.grid(axis='y')
-    # plt.annotate(str(qValues_means[0]), 
-    #     (0, qValues_means[0]))
-    # plt.annotate(str(qValues_means[10]), 
-    #     (10, qValues_means[10]))
 
 def plot_AR(plt, AR):
     ARR_array = np.array(AR)
     ARR_means = np.mean(ARR_array, axis=0)
-    for i in range(0, number_of_arms, 2):
-        plt.plot(ARR_means[i])
+    max_ARR_means = np.max(ARR_means, axis=0)
+    plt.plot(100 * max_ARR_means)
     plt.legend([('Waiting time: ' + str(i)) for i in range(0, number_of_arms, 2)])
     plt.title('Average rate of using optimal action')
     plt.xlabel('Trials')
     plt.ylabel('AR')
+    plt.annotate(str(np.round(100*max_ARR_means[-1])) + '%', (len(max_ARR_means), 100*max_ARR_means[-1]))
 
 
 def perform_one_epoch(fig, number_of_arms, value, index):

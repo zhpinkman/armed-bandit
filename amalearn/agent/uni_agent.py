@@ -5,15 +5,16 @@ class UniAgent(AgentBase):
     def __init__(self, id, environment, policy):
         super(UniAgent, self).__init__(id, environment)
         self.policy = policy
-        self.lamda = -4
-        self.alpha = 0.88
-        self.beta = 1.12
-        self.monetary_value = 5
+        self.lamda = -5
+        self.alpha = .88
+        self.beta = 1.5
+        self.monetary_value = 9
+        self.h = 1.5
         self.qValues = list()
         self.counts = list()
         self.observation = list()
         self.delay_border = 10
-        self.eps = 0.5
+        self.eps = .5
 
     def setup(self):
         actions_n = self.environment.available_actions()
@@ -42,12 +43,15 @@ class UniAgent(AgentBase):
         
 
     def apply_subjective(self, chosen_arm_index, reward):
+        p = 0
+        if chosen_arm_index > self.delay_border:
+            p = (chosen_arm_index - self.delay_border)**self.h
         # you get bus
         if reward <= chosen_arm_index:
             if reward <= self.delay_border:
                 return (self.delay_border - reward)**self.alpha + self.monetary_value
             else:
-                return self.lamda * (reward - self.delay_border)**self.beta + self.monetary_value
+                return self.lamda * (reward - self.delay_border)**self.beta + self.monetary_value - p
         # you get taxi
         else:
             if chosen_arm_index <= self.delay_border:
