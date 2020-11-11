@@ -31,7 +31,10 @@ def plot_AR(plt, AR):
     ARR_means = np.mean(ARR_array, axis=0)
     max_ARR_means = np.max(ARR_means, axis=0)
     plt.plot(100 * max_ARR_means)
-    plt.legend([('Waiting time: ' + str(i)) for i in range(0, number_of_arms, 2)])
+    max_index = []
+    for i in ARR_means:
+        max_index.append(i[-1])
+    plt.legend(['waiting time ' + str(np.argmax(max_index))], loc='lower right')
     plt.title('Average rate of using optimal action')
     plt.xlabel('Trials')
     plt.ylabel('AR')
@@ -54,6 +57,7 @@ def perform_one_epoch(fig, number_of_arms, value, index):
 
 
 for j in range(10):
+    print('epoch ' + str(j + 1))
     results, qValues = perform_one_epoch(fig, number_of_arms, 10, None)
     agg_results.append(results)
     agg_qValues.append(qValues)

@@ -15,6 +15,7 @@ class UniAgent(AgentBase):
         self.observation = list()
         self.delay_border = 10
         self.eps = .5
+        self.c = 2
 
     def setup(self):
         actions_n = self.environment.available_actions()
@@ -25,12 +26,15 @@ class UniAgent(AgentBase):
 
     def pick_arm(self):
         available_actions = self.environment.available_actions()
-        p = np.random.random() 
-        if p < self.eps:
-            chosen_arm_index = np.random.choice(available_actions)
-        else:
-            chosen_arm_index = np.argmax(self.qValues)
-        return chosen_arm_index
+        if self.policy == 'eGreedy':
+            p = np.random.random() 
+            if p < self.eps:
+                chosen_arm_index = np.random.choice(available_actions)
+            else:
+                chosen_arm_index = np.argmax(self.qValues)
+            return chosen_arm_index
+        # else: 
+
         
         
         
