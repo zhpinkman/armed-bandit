@@ -42,10 +42,10 @@ def plot_AR(plt, AR):
     plt.annotate(str(np.round(100*max_ARR_means[-1])) + '%', (len(max_ARR_means), 100*max_ARR_means[-1]))
 
 
-def perform_one_epoch(fig, number_of_arms, value, index):
+def perform_one_epoch(number_of_arms, value, index):
     rewards = [UniReward() for i in range(number_of_arms)]
     env = UniEnv(rewards, 100000, '1')
-    agent = UniAgent('1', env, 'eGreedy')
+    agent = UniAgent('1', env, 'UCB')
     agent.setup()
     results = [list() for i in range(number_of_arms)]
     for step in range(100000):
@@ -56,9 +56,9 @@ def perform_one_epoch(fig, number_of_arms, value, index):
 
 
 
-for j in range(10):
+for j in range(5):
     print('epoch ' + str(j + 1))
-    results, qValues = perform_one_epoch(fig, number_of_arms, 10, None)
+    results, qValues = perform_one_epoch(number_of_arms, 10, None)
     agg_results.append(results)
     agg_qValues.append(qValues)
 

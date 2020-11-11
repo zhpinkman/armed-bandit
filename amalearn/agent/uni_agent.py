@@ -16,11 +16,12 @@ class UniAgent(AgentBase):
         self.delay_border = 10
         self.eps = .5
         self.c = 2
+        self.agg_counts = 1
 
     def setup(self):
         actions_n = self.environment.available_actions()
-        self.qValues = [8.0 for i in range(actions_n)]
-        self.counts = [0 for i in range(actions_n)]
+        self.qValues = [10.0 for i in range(actions_n)]
+        self.counts = [1 for i in range(actions_n)]
         self.observation = [list() for i in range(actions_n)]
 
 
@@ -33,7 +34,15 @@ class UniAgent(AgentBase):
             else:
                 chosen_arm_index = np.argmax(self.qValues)
             return chosen_arm_index
-        # else: 
+        else:   
+            rewards = []
+            for action in range(available_actions):
+                action_reward = (self.qValues[action] + 
+                    self.c * np.sqrt(np.log(self.agg_counts) / self.counts[action]))
+                rewards.append(action_reward)
+            self.agg_counts += 1
+            return np.argmax(rewards)
+
 
         
         
