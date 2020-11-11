@@ -15,12 +15,12 @@ class UniAgent(AgentBase):
         self.observation = list()
         self.delay_border = 10
         self.eps = .5
-        self.c = 2
+        self.c = 10
         self.agg_counts = 1
 
     def setup(self):
         actions_n = self.environment.available_actions()
-        self.qValues = [10.0 for i in range(actions_n)]
+        self.qValues = [15.0 for i in range(actions_n)]
         self.counts = [1 for i in range(actions_n)]
         self.observation = [list() for i in range(actions_n)]
 
@@ -85,4 +85,4 @@ class UniAgent(AgentBase):
         self.environment.render()
         if sum(self.counts) % 100 == 0:
             self.eps -= 0.005 
-        return self.counts, self.qValues
+        return self.counts, self.qValues, reward
