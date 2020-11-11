@@ -11,7 +11,7 @@ class NetAgent(AgentBase):
         self.h = list()
         self.eps = .5
         self.average_reward = 0
-        self.lr = .1
+        self.lr = .01
 
     def setup(self):
         actions_n = self.environment.available_actions()
@@ -73,6 +73,6 @@ class NetAgent(AgentBase):
         if sum(self.counts) % 10 == 0:
             self.eps -= 0.0005 
         if self.policy == 'eGreedy':
-            return self.counts, self.qValues
+            return self.counts, self.qValues, reward
         else: 
-            return self.counts, self.h
+            return self.counts, self.h, reward
