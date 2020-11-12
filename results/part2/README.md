@@ -1,1 +1,52 @@
 ### Results part 2
+
+In this part, we have designed an environment where an agent tries to find the best waiting time for bus considering the amount of money the agent wants to save and also the time when it arrive at university to attend the class. 
+
+First, the rewards, utility function and other chief points are mentioned and justified. After that, we will illustrate the agent's performance exploiting two different policies which were used to choose the best action regarding the propensity of the agent to arrive sooner or later or save more moeney. We used `UCB` and `epsilon greedy` policies to choose between our available arms.
+
+
+In addition to that, we have plotted the reward function used giving rewards to our agent by attending to their mean values and also the propabilities constituted the whole reward function. 
+
+Another essential information about our model is that it exploits an subjective approach reacting to the observed reward. Note that all the hyper-parameters were thoroughly examined with different settings. Besides, they were chosen carefully to comply with the reward function and weight function introduced in `Prospect theory` by `Daniel Kahneman `and `Amos Tversky`
+
+
+---
+
+### Rewards, Utility Function, Actions
+
+#### Rewards
+
+
+The reward function was designed as a Normal distribution reward functino with the mean value of 6 and the standard deviation of 4. 
+These values show when the bus is going to arrive at the station where our agent is patiently waiting. Since the negative values comming out of this reward function should be ignored, we take as much as samples from this distribution to just find the value justify the constraints imposed on our reward function. __Also note that the rewards are compared to a delay-border which is the time when arriving after that would penalizes the agent.__
+
+#### Actions
+
+The actions in this armed-bandit problem are the amount of waiting that our agent chooses. To include all possible amounts of waiting, our agent was set to choose between amounts in the range of two standard deviation of our reward function's mean value. On this ground, our actions range from 0 to 14. That means that our agent is capble of choosing between waiting 0 minutes to 14 minutes.
+
+#### Utility Function
+
+Our agent is designed to apply a subjective value of rewards to the observed reward in terms of reward and punishment values that our agent sees the rewards through those glasses. 
+Our agent incorporates the approach of `Prospect theory` to the observed rewards. 
+
+| ![](valueFunction.png) | 
+|:--:|
+|*The value Function suggested by prospect theory*|
+
+Having this model in mind, we have designed a one akin to the mentioned value function. Our model uses `lambda value of 5` for avoiding punishments. `Alpha and beta values of 0.88 and 1.5`, respectively, were used to incorporate a non-linearity to our subjective value. `The monetary value of 8.5` was set based on our experiments using different set of monetary values. This value somehow shows the degree to which we care to spend less money and save. `The delay border of 10` illustrate the point further that we would miss the class. `The epsilon value of 0.5 `was initially set and gradually decreases as we go through more sample data. This hyper-parameter was used in the epsilon greedy policy which was one of our chosen policies. By reducing the amount of epsilon with time we switch from a exploration mode of using actions to a greedy exploitation of using the best actions. __Another point in our model is usage of the hyper-parameter c which penelizes the agent for missing the class more and more as the time passes.__
+
+---
+
+
+* one of most important things that we can conspicuously say from the charts modeling the class-arriving task is that the monetary value regarding the value of time is so potent that adjusting this hyper-parameter can largely impact the convergance of our model. 
+
+
+* By changing this monetary value from 3.33 that is equal to 4 timesteps to 7.1 we can spot the the point in 4.1.
+with monetary values lower than this, the value of time can readily outweigh the value of money. But at this point that monetary value is equal to punishment of 2 minutes delay or 5 minutes early arriving, we can see that the model is considering options other than just taking taxi and getting too soon to the university.
+
+* after some trials and also by adjusting the hyper-parameters that were cardinal factors in describing the behvaior and the decision making of the people regarding the period of time they wait for the bus service to save money, I found that the value that we assign to getting the class with delay and also the relative monetary value would be considerably determining. 
+
+
+* At first we opt the utility function suggested by Kahnemman et al. with 0.88, 0.88, 2.55 for alpha, beta, and the punishment coefficient respectively. By considering different monetary values, that was so compelling that by altering this value the decision made by people will be influenced. By considering no value regarding the value of reaching the class early, people will just choose to take taxi and get to their class as soon as possible. By nudging the monetary value we observed that people shift toward choosing wait longer. This introduces a point where people have no more tendency toward taking a taxi or saving the money by take a bus ride. These observation are depicted in the charts attached to this document. 
+
+* it is worth alluding to that one of the policies used in this part was esplion greedy with initial value epslion of 0.5. in each 100 epochs, we have lowered the value of epsilon by 0.005. In this way we are narrowing down our choice of actions as we go further in the process of choosing actions. Also, we are confident that the initial value of epsilon is just the best initial value it can obtain, considering all the experiments in terms of different epsilon values. 
