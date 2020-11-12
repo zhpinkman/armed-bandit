@@ -26,16 +26,18 @@ lr = 0.001             |  lr = 0.0001
 In the following figures, you can observe the performance of the model in terms of rate of using the best action agent can opt to act upon it. In addition to that, the figures corresponded to the amount of regret compared to a random policy agent was depicted to somehow illustrate the effect of our `Thompson Sampling` policy in mitigating the regret that our agent is sensing.
 
 
-![](AR.png)
+
+| ![](AR.png) | 
+|:--:| 
+| *Average rate of using the best action* |
 
 
- > Average rate of using the best action 
 
+| ![](Regret.png) | 
+|:--:|
+|*Regret that was sensed by the Agent in time*|
 
-
-![](Regret.png)
-
-> Regret that was sensed by the Agent in time 
+ 
 
 * As you can see our agent is doing way more better than a random policy agent in getting regrets from environment. Also that is worth to note that the average rate of using the best action,too, is noticeably good. This matter is brought about by the fact that the mean rewards are too dense in a relatively small area. So, being able to converge to some action and ignoring the other sub-optimal actions would be a good option featuring in our results. 
 
