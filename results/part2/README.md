@@ -22,7 +22,7 @@ These values show when the bus is going to arrive at the station where our agent
 
 #### Actions
 
-The actions in this armed-bandit problem are the amount of waiting that our agent chooses. To include all possible amounts of waiting, our agent was set to choose between amounts in the range of two standard deviation of our reward function's mean value. On this ground, our actions range from 0 to 14. That means that our agent is capble of choosing between waiting 0 minutes to 14 minutes.
+The actions in this armed-bandit problem are the amount of waiting that our agent chooses. To include all possible amounts of waiting, our agent was set to choose between amounts in the range of two standard deviation of our reward function's mean value. On this ground, our actions range from 0 to 14. That means that our agent is capble of choosing between waiting 0 minutes to 14 minutes. To clarify, we have 14 arms corresponding to agent's waiting time.
 
 #### Utility Function
 
@@ -36,6 +36,27 @@ Our agent incorporates the approach of `Prospect theory` to the observed rewards
 Having this model in mind, we have designed a one akin to the mentioned value function. Our model uses `lambda value of 5` for avoiding punishments. `Alpha and beta values of 0.88 and 1.5`, respectively, were used to incorporate a non-linearity to our subjective value. `The monetary value of 8.5` was set based on our experiments using different set of monetary values. This value somehow shows the degree to which we care to spend less money and save. `The delay border of 10` illustrate the point further that we would miss the class. `The epsilon value of 0.5 `was initially set and gradually decreases as we go through more sample data. This hyper-parameter was used in the epsilon greedy policy which was one of our chosen policies. By reducing the amount of epsilon with time we switch from a exploration mode of using actions to a greedy exploitation of using the best actions. __Another point in our model is usage of the hyper-parameter c which penelizes the agent for missing the class more and more as the time passes.__
 
 ---
+
+### Reward Function
+
+To have a better insight into the environment where our agent is exploring and epxloiting, it would be good to know what the actual rewards do actually look like. 
+
+
+| ![](reward_function.png) | 
+|:--:|
+|*The actual rewards corresponded to each action*|
+
+As you can see in the figure, the reward meets its climax in the point of 10 means that waiting 10 minutes would be the best action that our agent can consider. That is reasonable on this ground that the monetary value would outweigh the situation in which the agent would get to its class sooner. Moreover, you can notice that waiting zero time and get to the class ASAP, too, is actually a reasonable choice for agent. That is because the designed reward function put a lot of value in getting to the class sooner, but not as much as saving money. __Getting to the class later and missing the class would not be a considerable choice for agent as you can see in the figure as a result of penelizing the agent for missing the class.__
+
+---
+
+### Epsilon Greedy
+
+
+
+---
+
+### UCB
 
 
 * one of most important things that we can conspicuously say from the charts modeling the class-arriving task is that the monetary value regarding the value of time is so potent that adjusting this hyper-parameter can largely impact the convergance of our model. 

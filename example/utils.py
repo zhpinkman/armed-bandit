@@ -8,7 +8,7 @@ std = 4
 beta = 1.5
 alpha = .88
 lamda = -5
-monetary_value = 9
+monetary_value = 8.5
 delay_border = 10
 h = 1.5
 
@@ -44,4 +44,8 @@ for i in range(20):
     actual_rewards.append(calc_rewards(i))
 
 plt.plot(actual_rewards)
+plt.title('Actual rewards corresponded to each action(arm)')
+plt.ylabel('Reward')
+plt.xlabel('The waiting time')
+plt.grid(axis='y')
 plt.show()
