@@ -21,20 +21,21 @@ lr = 0.001             |  lr = 0.0001
 * The scale of y axis in these plots is the number of using specified actions, whereas the x axis scale is the number of trials.
 * Another attendable part of these plots is that the legend is depicting different arms' award means. 
 
+---
+
 In the following figures, you can observe the performance of the model in terms of rate of using the best action agent can opt to act upon it. In addition to that, the figures corresponded to the amount of regret compared to a random policy agent was depicted to somehow illustrate the effect of our `Thompson Sampling` policy in mitigating the regret that our agent is sensing.
 
-<div style="text-align:center"><img src="AR.png" /></div>
+
+![](AR.png)
 
 
-<div style="text-align:center; margin-top:20px; margin-bottom:20px">
- Average rate of using the best action </div>
+ Average rate of using the best action 
 
 
 
-<div style="text-align:center" >
-<img src="Regret.png" /></div>
+![](Regret.png)
 
-<div style="text-align:center; margin-top:20px; margin-bottom:20px">
-Regret that was sensed by the Agent in time </div>
+Regret that was sensed by the Agent in time 
 
-* As you can see our agent is doing way more better than a random policy agent in getting regrets from environment. Also that is worth to note that the average rate of using the best action,too, is noticeably good. This matter is brought about by the fact that the mean rewards are too dense in a relatively small area. So, being able to converge to some action and ignoring the other sub-optimal actions would be a good option featuring 
+* As you can see our agent is doing way more better than a random policy agent in getting regrets from environment. Also that is worth to note that the average rate of using the best action,too, is noticeably good. This matter is brought about by the fact that the mean rewards are too dense in a relatively small area. So, being able to converge to some action and ignoring the other sub-optimal actions would be a good option featuring in our results. 
+
