@@ -1,24 +1,3 @@
-## important observations in part 1:
-
-
-* In this part we have used the bayesian belief revision to find the optimal action between different actions with normal distribution rewards. In this path, the degree to which the estimated mean and variance are updating themselves was set constantly to 0.1. This value was chosed by observing the impact of learning rate on the process of realizing the absolute value of mean and variance of different rewards.
-
-* The policy used in this part was thompson sampling in which we pick samples from available actions of the environment considering our mindset about their mean and variance. That is brought about by the fact that we reckon all the rewards are conforming to a normal distribution. In this way we take actions in each timestep, get the corresponding reward, and update the mean and variance of the chosen action. 
-
-* At first, the average rate of using optimal action was used to determine the validity of the model and observing the results. All the following plots are depicted with y axis of AR and x axis of number of trials. As you can see the effect of using reasonable learning rate is indisputable.
-
-lr = 0.1             |  lr = 0.01
-:-------------------------:|:-------------------------:
-![](results/part1/lr=0.1.png)  |  ![](results/part1/lr=0.01.png)
-
-lr = 0.001             |  lr = 0.0001
-:-------------------------:|:-------------------------:
-![](results/part1/lr=0.001.png) | ![](results/part1/lr=0.0001.png)
-
-* The scale of y axis in these plots is the number of using specified actions, whereas the x axis scale is the number of trials.
-* Another attendable part of these plots is that the legend is depicting different arms' award means. 
-
-
 * We can attest that the mean reward computed for no waiting time and getting a taxi is 7.559337532033437. 
 
 ## important observations in part 2:
