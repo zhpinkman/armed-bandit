@@ -1,6 +1,6 @@
 ### Results part 2
 
-In this part, we have designed an environment where an agent tries to find the best waiting time for bus considering the amount of money the agent wants to save and also the time when it arrive at university to attend the class. 
+In this part, we have designed an environment where an agent tries to find the best waiting time for bus considering the amount of money the agent wants to save and also the time when it arrive at university to attend the class. Note that because of the stochasticness that this task has, some of the rates or results may vary slightly. 
 
 First, the rewards, utility function and other chief points are mentioned and justified. After that, we will illustrate the agent's performance exploiting two different policies which were used to choose the best action regarding the propensity of the agent to arrive sooner or later or save more moeney. We used `UCB` and `epsilon greedy` policies to choose between our available arms.
 
@@ -17,7 +17,7 @@ Another essential information about our model is that it exploits an subjective 
 #### Rewards
 
 
-The reward function was designed as a Normal distribution reward functino with the mean value of 6 and the standard deviation of 4. 
+The reward function was designed as a Normal distribution reward function with the mean value of 6 and the standard deviation of 4. 
 These values show when the bus is going to arrive at the station where our agent is patiently waiting. Since the negative values comming out of this reward function should be ignored, we take as much as samples from this distribution to just find the value justify the constraints imposed on our reward function. __Also note that the rewards are compared to a delay-border which is the time when arriving after that would penalizes the agent.__
 
 #### Actions
