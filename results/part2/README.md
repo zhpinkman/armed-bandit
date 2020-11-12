@@ -22,7 +22,7 @@ These values show when the bus is going to arrive at the station where our agent
 
 #### Actions
 
-The actions in this armed-bandit problem are the amount of waiting that our agent chooses. To include all possible amounts of waiting, our agent was set to choose between amounts in the range of two standard deviation of our reward function's mean value. On this ground, our actions range from 0 to 14. That means that our agent is capble of choosing between waiting 0 minutes to 14 minutes. To clarify, we have 14 arms corresponding to agent's waiting time.
+The actions in this armed-bandit problem are the amount of waiting that our agent chooses. To include all possible amounts of waiting, our agent was set to choose between amounts in the range of two standard deviation of our reward function's mean value. On this ground, our actions range from 0 to 14. That means that our agent is capable of choosing between waiting 0 minutes to 14 minutes. To clarify, we have 14 arms corresponding to agent's waiting time.
 
 #### Utility Function
 
@@ -98,15 +98,15 @@ This part will demonstrate the performance of using the UCB policy for choosing 
 |*The average rate of using the best action - Agent's estimation of the reward function with c = 10*|
 
 
-As you can see with higher c values the agent converges sooner to higher rates of using the best action. But all of them will evantually converge to the best action with a reasonable rate of using that action that is worth noticing.
+As you can see with higher c values the agent converges sooner to higher rates of using the best action. But all of them will eventually converge to the best action with a reasonable rate of using that action that is worth noticing.
 
 ---
 
 ### Comparison between two policies
 
-We can compare two policies in terms of their regrets and also their average rate of using the best action. With these two metrics, we can say which of these policies are better in what facet of doing the task of finding the best action. Although they both find the best action and they both will evantually converge to doing the best action, other characteristics of these models are slightly different from one another.
+We can compare two policies in terms of their regrets and also their average rate of using the best action. With these two metrics, we can say which of these policies are better in what facet of doing the task of finding the best action. Although they both find the best action and they both will eventually converge to doing the best action, other characteristics of these models are slightly different from one another.
 
-In the following figures you can see the average of rate of using the best action for both of these policies together. For better results, before running the agents, the reward functions were made symmetric by using the same seed for their randomness.  
+In the following figures you can see the average rate of using the best action for both of these policies together. For better results, before running the agents, the reward functions were made symmetric by using the same seed for their randomness.  
 
 | ![](comparison1.png) | 
 |:--:|
@@ -120,7 +120,7 @@ In the following figures you can see the average of rate of using the best actio
 |:--:|
 |*The average rate of using the best action depicted for both policies*|
 
-All of these figures show that the epsilon greedy policy is capble of converging sooner to the best action and as you can see, it gets to some reasonable rate of using the best action just after carrying out some number of trials. But that is so conspicuous from the second figure that it is entirely possible that the UCB gets to some better rate even after carrying out so many trials. The fact that the UCB policy can consider all the choices it has with time passing and attending to less attended choices wholly justifies this observation. In contrast to the epsilon greedy policy in which the tendency to choose the best action found till that specific trial will keep rising to reach the full-exploitation.
+All of these figures show that the epsilon greedy policy is capable of converging sooner to the best action and as you can see, it gets to some reasonable rate of using the best action just after carrying out some number of trials. But that is so conspicuous from the second figure that it is entirely possible that the UCB gets to some better rate even after carrying out so many trials. The fact that the UCB policy can consider all the choices it has with time passing and attending to less attended choices wholly justifies this observation. In contrast to the epsilon greedy policy in which the tendency to choose the best action found till that specific trial will keep rising to reach the full-exploitation.
 
 | ![](regret_comparison.png) | 
 |:--:|
