@@ -43,3 +43,16 @@ In the following figures, you can observe the performance of the model in terms 
 
 ---
 
+| ![](greedy.png) | 
+|:--:|
+|*Average rate of using the best action acting upon a greedy policy*|
+
+
+
+*The greedy method performed significantly worse in the long run because it often got stuck performing suboptimal actions*
+
+*The eGreedy methods eventually performed better because they continued
+to explore and to improve their chances of recognizing the optimal action.*
+
+
+* Compared to what is alluded to in the book I referred to before, our model is doing better in terms of always finding the best possibel action, and also in reaching better rate compared to the eGreedy or greedy. Because of the stochastic origin our reward function possess, we had to carry out some runs to be sure that our model is doing well. After doing that, we can entirely be sure that the rate of using the best action would be absolutely better than some threshold above `80%` which is better than the performance of models mentioned in the book.
