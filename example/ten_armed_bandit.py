@@ -36,14 +36,20 @@ def plot_AR(plt, window_AR):
     plt.ylabel('Average rate of using optimal action')
     plt.xlabel('Trials')
 
-def plot_regrets(plt, regrets):
-    plt.plot(regrets)
+def plot_regrets(plt, regrets, policy):
+    plt.plot(regrets, label=(policy))
     plt.annotate(str(np.round(regrets[-1])), 
         (1000, regrets[-1]))
     plt.title('Regrets plot')
     plt.ylabel('Degree of regret')
     plt.xlabel('Trials')
 
+
+def plot_agg_regrets(plt, regrets, random_regrets):
+    plot_regrets(plt, regrets, 'Thomspon Sampling')
+    plot_regrets(plt, random_regrets, 'Random Policy')
+    plt.legend()
+    plt.grid(axis='y')
 
 number_of_arms = 10
 
@@ -83,10 +89,12 @@ regrets = window_regret(mu, agg_rewards)
 random_regrets = window_regret(mu, random_agg_rewards)
 
 
+
+
 # plot_AR(plt, window_AR)
-plot_regrets(plt, regrets)
-plot_regrets(plt, random_regrets)
-plt.grid(axis='y')
+
+
+plot_agg_regrets(plt, regrets, random_regrets)
 plt.show()
 
 
