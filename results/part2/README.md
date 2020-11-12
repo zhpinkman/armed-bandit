@@ -83,14 +83,47 @@ By changing this monetary value from lower values to higher values, the value of
 
 ### UCB
 
+This part will demonstrate the performance of using the UCB policy for choosing between different arms. In the below figures you can see the plot depicting the average rate of using the best action which is arm number 10 which means waiting 10 minutes before getting a taxi.
+
+| ![](UCB/UCB3.png) | 
+|:--:|
+|*The average rate of using the best action - Agent's estimation of the reward function with c = 2*|
+
+| ![](UCB/UCB2.png) | 
+|:--:|
+|*The average rate of using the best action - Agent's estimation of the reward function with c = 5*|
+
+| ![](UCB/UCB1.png) | 
+|:--:|
+|*The average rate of using the best action - Agent's estimation of the reward function with c = 10*|
 
 
+As you can see with higher c values the agent converges sooner to higher rates of using the best action. But all of them will evantually converge to the best action with a reasonable rate of using that action that is worth noticing.
 
+---
 
-* By changing this monetary value from 3.33 that is equal to 4 timesteps to 7.1 we can spot the the point in 4.1.
-with monetary values lower than this, the value of time can readily outweigh the value of money. But at this point that monetary value is equal to punishment of 2 minutes delay or 5 minutes early arriving, we can see that the model is considering options other than just taking taxi and getting too soon to the university.
+### Comparison between two policies
 
+We can compare two policies in terms of their regrets and also their average rate of using the best action. With these two metrics, we can say which of these policies are better in what facet of doing the task of finding the best action. Although they both find the best action and they both will evantually converge to doing the best action, other characteristics of these models are slightly different from one another.
 
+In the following figures you can see the average of rate of using the best action for both of these policies together. For better results, before running the agents, the reward functions were made symmetric by using the same seed for their randomness.  
 
+| ![](comparison1.png) | 
+|:--:|
+|*The average rate of using the best action depicted for both policies*|
 
-* At first we opt the utility function suggested by Kahnemman et al. with 0.88, 0.88, 2.55 for alpha, beta, and the punishment coefficient respectively. By considering different monetary values, that was so compelling that by altering this value the decision made by people will be influenced. By considering no value regarding the value of reaching the class early, people will just choose to take taxi and get to their class as soon as possible. By nudging the monetary value we observed that people shift toward choosing wait longer. This introduces a point where people have no more tendency toward taking a taxi or saving the money by take a bus ride. These observation are depicted in the charts attached to this document. 
+| ![](comparison2.png) | 
+|:--:|
+|*The average rate of using the best action depicted for both policies*|
+
+| ![](comparison3.png) | 
+|:--:|
+|*The average rate of using the best action depicted for both policies*|
+
+All of these figures show that the epsilon greedy policy is capble of converging sooner to the best action and as you can see, it gets to some reasonable rate of using the best action just after carrying out some number of trials. But that is so conspicuous from the second figure that it is entirely possible that the UCB gets to some better rate even after carrying out so many trials. The fact that the UCB policy can consider all the choices it has with time passing and attending to less attended choices wholly justifies this observation. In contrast to the epsilon greedy policy in which the tendency to choose the best action found till that specific trial will keep rising to reach the full-exploitation.
+
+| ![](regret_comparison.png) | 
+|:--:|
+|*The regret that agents with each policy experience as well as regret observed from random-policy agent*|
+
+As you can notice from this figure, the regret each agent with their policies experience is reasonably better than the regret agent with random policy senses, but the regret between two agents themselves don't have a noticeable difference. 
