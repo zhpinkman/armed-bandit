@@ -1,4 +1,4 @@
-### Results part 1
+### Thompson Sampling and Greedy Policies
 
 In this part we have examined the effect of using Thompson sampling policy for a 10 armed-bandit. The process of learning was in 1000 Trials and the whole process was repeated 20 times. Provided results are the mean values from 20 samples to make the results more robust. In the following, we have provided you the results and also the comparison have been made between them and the counterpart agent suggested by the Book `Reinforcement Learning An Introduction` by `Richard S. Sutton` and `Andrew G. Barto`.
 

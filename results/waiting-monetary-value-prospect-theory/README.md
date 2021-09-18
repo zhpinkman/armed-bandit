@@ -1,4 +1,4 @@
-### Results part 2
+### Waiting Time Monetary Value with Prospect Theory
 
 In this part, we have designed an environment where an agent tries to find the best waiting time for bus considering the amount of money the agent wants to save and also the time when it arrives at the university to attend the class. Note that because of the stochasticness that this task has, some of the rates or results may vary slightly. 
 
